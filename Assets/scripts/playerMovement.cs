@@ -6,8 +6,10 @@ public class playerMovement : MonoBehaviour
 
 
     private PlayerInputActions _testActions;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     public float JumpForce = 10;
+    public float MoveSpeed = 30;
+    private float horizontalMove;
 
     void Start()
     {
@@ -32,7 +34,15 @@ public class playerMovement : MonoBehaviour
     void Jump(InputAction.CallbackContext ctx)
     {
         Debug.Log("Jump");
-        rb.linearVelocity = new Vector2(0, JumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
+    }
+
+    void Update()
+    {
+        if (_testActions.player.LeftRight.IsPressed())
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x + (_testActions.player.LeftRight.ReadValue<float>() * MoveSpeed), rb.linearVelocity.y);
+        }
     }
     
 }

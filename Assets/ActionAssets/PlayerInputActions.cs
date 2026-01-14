@@ -100,6 +100,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftRight"",
+                    ""type"": ""Value"",
+                    ""id"": ""83001869-00db-42c7-ae82-6546ecc3b716"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -135,6 +144,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""914aac85-a40e-42a8-9631-7193806aa03a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftRight"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""18103c8c-76a4-4040-ad7a-b67c4169f4d3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""11eefbca-de91-4c54-85fa-bb95375a8378"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -144,6 +186,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // player
         m_player = asset.FindActionMap("player", throwIfNotFound: true);
         m_player_Jump = m_player.FindAction("Jump", throwIfNotFound: true);
+        m_player_LeftRight = m_player.FindAction("LeftRight", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -225,6 +268,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_player_Jump;
+    private readonly InputAction m_player_LeftRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "player".
     /// </summary>
@@ -240,6 +284,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "player/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_player_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "player/LeftRight".
+        /// </summary>
+        public InputAction @LeftRight => m_Wrapper.m_player_LeftRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -269,6 +317,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @LeftRight.started += instance.OnLeftRight;
+            @LeftRight.performed += instance.OnLeftRight;
+            @LeftRight.canceled += instance.OnLeftRight;
         }
 
         /// <summary>
@@ -283,6 +334,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @LeftRight.started -= instance.OnLeftRight;
+            @LeftRight.performed -= instance.OnLeftRight;
+            @LeftRight.canceled -= instance.OnLeftRight;
         }
 
         /// <summary>
@@ -330,5 +384,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LeftRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeftRight(InputAction.CallbackContext context);
     }
 }
