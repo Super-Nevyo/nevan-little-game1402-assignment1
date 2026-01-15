@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
 
     void GroundCheck()
     {
-        _isGrounded = Physics2D.Raycast((Vector2)transform.position + startPointOffSet, Vector2.down, groundCheckDistance, groundLayer);
+        _isGrounded = Physics2D.Raycast((Vector2)transform.position + startPointOffSet, Vector2.right, groundCheckDistance, groundLayer);
     }
 
     void OnDrawGizmos()
     {
-        Debug.DrawLine((Vector2)transform.position + startPointOffSet,(Vector2) transform.position + startPointOffSet + Vector2.down * groundCheckDistance, _isGrounded ? Color.green : Color.red);
+        Debug.DrawLine((Vector2)transform.position + startPointOffSet,(Vector2) transform.position + startPointOffSet + Vector2.right * groundCheckDistance, _isGrounded ? Color.green : Color.red);
     }
 }
