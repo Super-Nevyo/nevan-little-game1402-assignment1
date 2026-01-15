@@ -44,5 +44,7 @@ public class playerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x + (_testActions.player.LeftRight.ReadValue<float>() * MoveSpeed), rb.linearVelocity.y);
         }
     }
+
     
+
 }
