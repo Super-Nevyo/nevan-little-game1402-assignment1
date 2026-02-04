@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class CoinController : MonoBehaviour
+public class CoinController : MonoBehaviour, ICollectable
 {
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnCollect(Rigidbody2D rb)
     {
-        if (other.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+        Debug.Log("coin collected");
+        Destroy(gameObject);
     }
+
 }

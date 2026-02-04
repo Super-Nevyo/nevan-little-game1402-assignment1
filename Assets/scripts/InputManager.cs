@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
 
     public System.Action OnJump;
     public System.Action<float> OnMove;
+    public System.Action<float> ChangePosition;
+    public System.Action<float> ChangeGravity;
     void Awake()
     {
         _playerInputActions = new PlayerInputActions();
@@ -35,11 +37,21 @@ public class InputManager : MonoBehaviour
 
     void OnMovement()
     {
-        OnMove?.Invoke(_playerInputActions.player.LeftRight.ReadValue<float>());
+        OnMove?.Invoke(_playerInputActions.player.VelocityChange.ReadValue<float>());
+    }
+    void OnChangePosition()
+    {
+        ChangePosition?.Invoke(_playerInputActions.player.PositionChange.ReadValue<float>());
+    }
+    void OnChangeGravity()
+    {
+        ChangeGravity?.Invoke(_playerInputActions.player.GravityControl.ReadValue<float>());
     }
 
     private void Update()
     {
         OnMovement();
+        OnChangePosition();
+        OnChangeGravity();
     }
 }

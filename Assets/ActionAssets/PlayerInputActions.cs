@@ -102,9 +102,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LeftRight"",
+                    ""name"": ""VelocityChange"",
                     ""type"": ""Value"",
                     ""id"": ""83001869-00db-42c7-ae82-6546ecc3b716"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PositionChange"",
+                    ""type"": ""Value"",
+                    ""id"": ""d9acceee-b650-4afe-80d4-6f75ca39732c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GravityControl"",
+                    ""type"": ""Value"",
+                    ""id"": ""216caf32-9627-4deb-988e-1b2e612da2bf"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -135,24 +153,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""5ce5ac27-858f-48a0-97b3-8577ffaba16b"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""1D Axis"",
                     ""id"": ""914aac85-a40e-42a8-9631-7193806aa03a"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""VelocityChange"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -163,18 +170,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""64aba2c2-ead5-479e-9ee4-52438cf49efc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""VelocityChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -185,18 +181,73 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""VelocityChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""96f6a82a-51d2-442d-9b7a-62170362b60c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PositionChange"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2e531742-1de8-4681-b08b-9ea6caa37585"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PositionChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""ed6501e2-5d91-44eb-8d78-6e94230eb734"",
+                    ""id"": ""49de97ca-f6a0-48f7-ac73-3a4af393c297"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftRight"",
+                    ""action"": ""PositionChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""473c387c-e318-4f97-b6fc-1e86a7971e06"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GravityControl"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""39b3c016-8f4c-4569-b262-652958e1ec98"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GravityControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""e75059f3-cf72-4352-b809-73412e001490"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GravityControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -208,7 +259,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // player
         m_player = asset.FindActionMap("player", throwIfNotFound: true);
         m_player_Jump = m_player.FindAction("Jump", throwIfNotFound: true);
-        m_player_LeftRight = m_player.FindAction("LeftRight", throwIfNotFound: true);
+        m_player_VelocityChange = m_player.FindAction("VelocityChange", throwIfNotFound: true);
+        m_player_PositionChange = m_player.FindAction("PositionChange", throwIfNotFound: true);
+        m_player_GravityControl = m_player.FindAction("GravityControl", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -290,7 +343,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_player_Jump;
-    private readonly InputAction m_player_LeftRight;
+    private readonly InputAction m_player_VelocityChange;
+    private readonly InputAction m_player_PositionChange;
+    private readonly InputAction m_player_GravityControl;
     /// <summary>
     /// Provides access to input actions defined in input action map "player".
     /// </summary>
@@ -307,9 +362,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_player_Jump;
         /// <summary>
-        /// Provides access to the underlying input action "player/LeftRight".
+        /// Provides access to the underlying input action "player/VelocityChange".
         /// </summary>
-        public InputAction @LeftRight => m_Wrapper.m_player_LeftRight;
+        public InputAction @VelocityChange => m_Wrapper.m_player_VelocityChange;
+        /// <summary>
+        /// Provides access to the underlying input action "player/PositionChange".
+        /// </summary>
+        public InputAction @PositionChange => m_Wrapper.m_player_PositionChange;
+        /// <summary>
+        /// Provides access to the underlying input action "player/GravityControl".
+        /// </summary>
+        public InputAction @GravityControl => m_Wrapper.m_player_GravityControl;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -339,9 +402,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @LeftRight.started += instance.OnLeftRight;
-            @LeftRight.performed += instance.OnLeftRight;
-            @LeftRight.canceled += instance.OnLeftRight;
+            @VelocityChange.started += instance.OnVelocityChange;
+            @VelocityChange.performed += instance.OnVelocityChange;
+            @VelocityChange.canceled += instance.OnVelocityChange;
+            @PositionChange.started += instance.OnPositionChange;
+            @PositionChange.performed += instance.OnPositionChange;
+            @PositionChange.canceled += instance.OnPositionChange;
+            @GravityControl.started += instance.OnGravityControl;
+            @GravityControl.performed += instance.OnGravityControl;
+            @GravityControl.canceled += instance.OnGravityControl;
         }
 
         /// <summary>
@@ -356,9 +425,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @LeftRight.started -= instance.OnLeftRight;
-            @LeftRight.performed -= instance.OnLeftRight;
-            @LeftRight.canceled -= instance.OnLeftRight;
+            @VelocityChange.started -= instance.OnVelocityChange;
+            @VelocityChange.performed -= instance.OnVelocityChange;
+            @VelocityChange.canceled -= instance.OnVelocityChange;
+            @PositionChange.started -= instance.OnPositionChange;
+            @PositionChange.performed -= instance.OnPositionChange;
+            @PositionChange.canceled -= instance.OnPositionChange;
+            @GravityControl.started -= instance.OnGravityControl;
+            @GravityControl.performed -= instance.OnGravityControl;
+            @GravityControl.canceled -= instance.OnGravityControl;
         }
 
         /// <summary>
@@ -407,11 +482,25 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "LeftRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "VelocityChange" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLeftRight(InputAction.CallbackContext context);
+        void OnVelocityChange(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PositionChange" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPositionChange(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GravityControl" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGravityControl(InputAction.CallbackContext context);
     }
 }

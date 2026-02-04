@@ -7,14 +7,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 20f;
 
     [SerializeField] private InputManager inputManager;
-    private bool _canJump => _isGrounded || Time.time < _lastGroundedCheck + _coyoteTime;
-    [SerializeField] private float _lastGroundedCheck;
+    private bool _canJump => _isGrounded || (Time.time < _lastGroundedCheck + _coyoteTime && Time.time > _lastJumpTime + _coyoteTime);
+    private float _lastGroundedCheck;
     [SerializeField] private float _coyoteTime = 0.3f;
+    private float _lastJumpTime;
     [Header("Ground Check")] 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector2 startPointOffSet;
     [SerializeField] private float groundCheckDistance;
-    private float _horizontalInput = 0;
+    private float _horizontalInputVelocity;
+    private float _positionChangeDirection;
+    private float _gravityChangeDirection;
     private bool _isGrounded = false;
     
     
@@ -27,17 +30,22 @@ public class PlayerController : MonoBehaviour
     {
         inputManager.OnJump += HandleJump;
         inputManager.OnMove += HandleMove;
+        inputManager.ChangePosition += PositionInput;
+        inputManager.ChangeGravity += GravityInput;
     }
     void OnDisable()
     {
         inputManager.OnJump -= HandleJump;
         inputManager.OnMove -= HandleMove;
+        inputManager.ChangePosition -= PositionInput;
+        inputManager.ChangeGravity += GravityInput;
     }
 
     void FixedUpdate()
     {
         HandleMovement();
         GroundCheck();
+        HandlePosition();
     }
 
     private void HandleJump()
@@ -45,29 +53,34 @@ public class PlayerController : MonoBehaviour
         if (_playerRB == null) return;
 
         if (_canJump)
+        {
             _playerRB.AddForceY(jumpForce, ForceMode2D.Impulse);
+            _lastJumpTime = Time.time;
+        }
     }
 
     private void HandleMove(float value)
     {
-        _horizontalInput = value;
+        _horizontalInputVelocity = value;
     }
-
     void HandleMovement()
     {
         if (_playerRB == null) return;
-        _playerRB.linearVelocityX +=_horizontalInput * moveSpeed;
+        _playerRB.linearVelocityX += _horizontalInputVelocity * moveSpeed;
     }
-    
-    //void OnTriggerStay2D(Collider2D other)
-    //{
-    //    if (other.gameObject.CompareTag("Ground")) {_isGrounded = true;}
-    //}
-    
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.gameObject.CompareTag("Ground")) {_isGrounded = false;}
-    //}
+    void PositionInput(float value)
+    {
+        _positionChangeDirection = value;
+    }
+    void HandlePosition()
+    {
+        if (_playerRB == null) return;
+        transform.position = new Vector2(_positionChangeDirection * Mathf.Abs(_playerRB.linearVelocityX) / 120f + transform.position.x, transform.position.y);
+    }
+    void GravityInput(float value)
+    {
+        _playerRB.gravityScale = -value * 2 + 4;
+    }
 
     void GroundCheck()
     {

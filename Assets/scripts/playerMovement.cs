@@ -39,9 +39,9 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
-        if (_testActions.player.LeftRight.IsPressed())
+        if (_testActions.player.VelocityChange.IsPressed())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x + (_testActions.player.LeftRight.ReadValue<float>() * MoveSpeed), rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x + (_testActions.player.VelocityChange.ReadValue<float>() * MoveSpeed), rb.linearVelocity.y);
         }
     }
 
