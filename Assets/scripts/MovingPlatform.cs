@@ -7,10 +7,6 @@ public class MovingPlatform : MonoBehaviour
     private float _speed = 1f;
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
-    void Start()
-    {
-        
-    }
     void Update()
     {
         _currentTime += _speed * Time.deltaTime;

@@ -8,9 +8,9 @@ public class InputManager : MonoBehaviour
     private PlayerInputActions _playerInputActions;
 
     public System.Action OnJump;
-    public System.Action<float> OnMove;
-    public System.Action<float> ChangePosition;
-    public System.Action<float> ChangeGravity;
+    public System.Action<float> OnMove; // the left and right arrow keys
+    public System.Action<float> ChangePosition; // the a and d keys
+    public System.Action<float> ChangeGravity; // the w and s keys
     void Awake()
     {
         _playerInputActions = new PlayerInputActions();
@@ -20,14 +20,12 @@ public class InputManager : MonoBehaviour
     void OnEnable()
     {
         _playerInputActions.player.Jump.performed += OnJumpPressed;
-        //_playerInputActions.player.LeftRight.performed += OnMovement;
         
     }
 
     void OnDisable()
     {
         _playerInputActions.player.Jump.performed -= OnJumpPressed;
-        //_playerInputActions.player.LeftRight.performed -= OnMovement;
     }
 
     void OnJumpPressed(InputAction.CallbackContext ctx)
@@ -50,8 +48,8 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        OnMovement();
-        OnChangePosition();
-        OnChangeGravity();
+        OnMovement(); // tells the player what direction they should be accelerating in
+        OnChangePosition(); // tells the player what direction they should be adding or subtracting movement from
+        OnChangeGravity(); // tells the player if they should increase or decrease gravity
     }
 }
