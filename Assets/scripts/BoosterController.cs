@@ -7,6 +7,6 @@ public class BoosterController : MonoBehaviour, ICollectable
     {
         if (rb.linearVelocityX == 0) return;
         Debug.Log("Boosted");
-        rb.linearVelocityX += 20f * (rb.linearVelocityX / Mathf.Abs(rb.linearVelocityX)); // x / |x| is equal to positive 1 if x>1 and negative 1 if x<1, it is effectively a normalization
+        rb.linearVelocityX += 20f * (rb.linearVelocityX / Mathf.Abs(rb.linearVelocityX)); // x / |x| is equal to positive 1 if x>0 and negative 1 if x<0, it is effectively a normalization
     }
 }

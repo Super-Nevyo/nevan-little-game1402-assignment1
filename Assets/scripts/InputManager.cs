@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     void OnDisable()
     {
         _playerInputActions.player.Jump.performed -= OnJumpPressed;
+        _playerInputActions.Disable();
     }
 
     void OnJumpPressed(InputAction.CallbackContext ctx)

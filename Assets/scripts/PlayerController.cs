@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _playerRB;
     [SerializeField] private float moveSpeed = 0.5f; // the acceleration from pressing the arrow keys
     [SerializeField] private float jumpForce = 20f; // the force applied when pressing the up arrow key or space key
+    [SerializeField] private float gravity = 4f;
+    [SerializeField] private float gravityChangeAmount = 2f;
+    [SerializeField] private float positionChangeReductionFromVelocity = 120f;
 
     [SerializeField] private InputManager inputManager;
     private bool _canJump => _isGrounded || (Time.time < _lastGroundedCheck + _coyoteTime && Time.time > _lastJumpTime + _coyoteTime); // implementing coyote time and cutting it if you have jumped
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
         inputManager.OnJump -= HandleJump;
         inputManager.OnMove -= HandleMove;
         inputManager.ChangePosition -= PositionInput;
-        inputManager.ChangeGravity += GravityInput;
+        inputManager.ChangeGravity -= GravityInput;
     }
 
     void FixedUpdate()
@@ -81,12 +84,12 @@ public class PlayerController : MonoBehaviour
     void HandlePosition()
     {
         if (_playerRB == null) return;
-        transform.position = new Vector2(_positionChangeDirection * Mathf.Abs(_playerRB.linearVelocityX) / 120f + transform.position.x, transform.position.y);
+        transform.position = new Vector2(_positionChangeDirection * Mathf.Abs(_playerRB.linearVelocityX) / positionChangeReductionFromVelocity + transform.position.x, transform.position.y);
     }
     // takes the input from w and s and changes gravity
     void GravityInput(float value)
     {
-        _playerRB.gravityScale = -value * 2 + 4;
+        _playerRB.gravityScale = -value * gravityChangeAmount + gravity;
     }
     // using a ray cast to check for the ground to allow jumping
     void GroundCheck()
